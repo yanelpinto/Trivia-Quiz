@@ -6,36 +6,43 @@
 	</head>
 	<body>
 <script language="Javascript">
-
-//Question and Answer Array
-var myQuestions = new Array();
-var myAnswers = new Array();
+//Declarations
+var myQuestions = new Array();  // Questions array
+var myAnswers = new Array();    // Answers array
+var myResponse = new Array();   // Response array
+var i;                          // For loop 1 variable
+var grade;                      // Grade value
+grade = 0;                      // Initial value of grade
+//Quiz Setup
+	
 //Question 1
 myQuestions[0] = new Array("The shape of the body in the water can be affected by: _______. Please type the letter only.\n",
 						   "(a) Weight control\n","(b) Streamlining\n","(c) Posture");
+//Answer 1
 myAnswers[0] = "c"
 //Question 2
 myQuestions[1] = new Array("What stroke is the most fun? Please type the letter only.\n",
 						   "(a) Freestyle \n","(b) Backstroke\n","(c) Breast stroke");
+//Answer 2
 myAnswers[1] = "c"
-//User Response Array
-var myResponse = new Array();
 
-//Question Prompt
-var i;
+
+//Question Prompt For Loop
 for (i=0; i < myQuestions.length; i++)
 {
-myResponse[i] = prompt(myQuestions[i][0] + myQuestions[i][1] + myQuestions[i][2] + myQuestions[i][3],"");
-if (myResponse[i] == myAnswers[i])
+myResponse[i] = prompt(myQuestions[i][0] + myQuestions[i][1] + myQuestions[i][2] + myQuestions[i][3],"");  // Question Prompt
+if (myResponse[i] == myAnswers[i])  // Logic to display if answer correct
 {
 alert("Correct!");
+grade += 1
 }
 else
 {
 alert("Incorrect!");
 }
 }
-//alert(myQuestions.length)
+// Grade display
+alert("Your score is " + grade + "/" + myQuestions.length + ".");
 </script>
 </body>
 </html>
