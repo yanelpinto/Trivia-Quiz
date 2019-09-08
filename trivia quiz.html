@@ -7,11 +7,35 @@
 	<body>
 <script language="Javascript">
 
+//Question and Answer Array
 var myQuestions = new Array();
+var myAnswers = new Array();
+//Question 1
 myQuestions[0] = new Array("The shape of the body in the water can be affected by: _______. Please type the letter only.\n",
-						   "(a) Weight control","(b) Streamlining","(c) Posture)");
+						   "(a) Weight control\n","(b) Streamlining\n","(c) Posture");
+myAnswers[0] = "c"
+//Question 2
+myQuestions[1] = new Array("What stroke is the most fun? Please type the letter only.\n",
+						   "(a) Freestyle \n","(b) Backstroke\n","(c) Breast stroke");
+myAnswers[1] = "c"
+//User Response Array
 var myResponse = new Array();
-myResponse[0] = prompt(myQuestions[0][0] + myQuestions[0][1] + myQuestions[0][2] + myQuestions[0][3],"")
+
+//Question Prompt
+var i;
+for (i=0; i < myQuestions.length; i++)
+{
+myResponse[i] = prompt(myQuestions[i][0] + myQuestions[i][1] + myQuestions[i][2] + myQuestions[i][3],"");
+if (myResponse[i] == myAnswers[i])
+{
+alert("Correct!");
+}
+else
+{
+alert("Incorrect!");
+}
+}
+//alert(myQuestions.length)
 </script>
 </body>
 </html>
