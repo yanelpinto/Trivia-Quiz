@@ -9,7 +9,7 @@
 	<body>
 	<script language="javascript">
 var prompts = new Array();
-prompts[0] = new  Array("Release Date: ","Run Time:","Rating: ","Cast: ","Director: ","Genre: ","Synopsis: ");
+prompts[0] = new  Array("Movie Title: ", "Release Date: ","Run Time:","Rating: ","Cast: ","Director: ","Genre: ","Synopsis: ");
 var entry = new Array();
 //For Loop Counters
 var i;
@@ -34,15 +34,23 @@ while (capt != "quit")
 	}
 i++;
 }
-	
+
+
+		
+		
+		
+		
 //For Loop 2 Counters
 var x;
 var z;
+var movnum;
 	
 		
 //For Loop for display entry information
 for (z=0; z < i; z++)
 {
+	movnum = z+1;
+	document.write ("Movie # " + movnum + "<br />");
 		for (x=0; x < prompts[0].length; x++)
 		{
 			if (entry[z][x] != null)
