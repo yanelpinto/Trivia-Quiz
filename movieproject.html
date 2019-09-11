@@ -8,63 +8,64 @@
 </head>
 	<body>
 	<script language="javascript">
-var prompts = new Array();
+var prompts = new Array(); 		// Prompts setup - Function Dynamic to add/remove prompts. - Used for inner for loop.
 prompts[0] = new  Array("Movie Title: ", "Release Date: ","Run Time:","Rating: ","Cast: ","Director: ","Genre: ","Synopsis: ");
-var entry = new Array();
+var entry = new Array();		// User entry multi-dimensional array setup
 //For Loop Counters
-var i;
-i = 0;
-var y;
-//Capture user prompt to evaluate for quit
-var capt;	
+var i;							// While Loop counter
+i = 0;							// Initial outer loop (while loop) value
+var y;							// Inner Loop variable - Move through prompts
+var capt;						// Capture user prompt to evaluate for quit
 		
 //Loop for gathering movie entry data.
-while (capt != "quit")
+while (capt != "quit")						// While Loop - Only breaks when user types "quit."
 {
 	entry[i] = new Array();
-	for (y=0; y < prompts[0].length; y++) 
+	for (y=0; y < prompts[0].length; y++) 	// Inner Loop - Data Entry
 	{
-		capt = prompt (prompts[0][y],"");
+		capt = prompt (prompts[0][y],"");	// Break Loop if "quit" entered by user.
 		if (capt == "quit") {
 				break;
 		}
 			else {
-				entry[i][y] = capt;
+				entry[i][y] = capt;			// If not quit, save to array.
 				}
 	}
+	entry[i][prompts[0].length] = i+1;      // Entry # in last position of row (for sorting purposes later)
 i++;
 }
 
-
-		
-		
-		
+//Multi-dimensional Sort - Magic
+entry.sort(function(a, b)					// Multi-dimensional alphabetical sort based on column 1 (Movie Name)
+{
+    var c = a[0].toLowerCase(), d = b[0].toLowerCase();
+        
+        return c < d ? -1 : c > d ? 1 : 0;
+});
 		
 //For Loop 2 Counters
-var x;
-var z;
-var movnum;
-	
-		
+var x;       //Inner Loop - Write Data to screen
+var z;       //Outer Loop - Loop through all entries
+var movnum;	 //Movie entry #
 //For Loop for display entry information
 for (z=0; z < i; z++)
 {
-	movnum = z+1;
-	document.write ("Movie # " + movnum + "<br />");
-		for (x=0; x < prompts[0].length; x++)
-		{
-			if (entry[z][x] != null)
+	movnum = entry[z][prompts[0].length];                  // Extracting # from multi array
+	document.write ("Movie # " + movnum + "<br />");       // Write entry # to screen
+		for (x=0; x < prompts[0].length; x++)              // Inner Loop - Data to Screen from multi array - Data previously
+		{       										   // sorted alphabetically.
+			if (entry[z][x] != null)					   // Filter out "undefined/null" data and write empty (blank) value.
 				{
 				document.write (prompts[0][x] + entry[z][x] + "<br />" );
 				}
 			else
 				{
-				document.write (prompts[0][x] + "<br />");
+				document.write (prompts[0][x] + "<br />");   // Write data.
 				}
 		}
-document.write ("<hr>");
+document.write ("<hr>");         							// Horizontal Divider Line
 }
-
+															// End
 	</script>
 </body>
 </html>
