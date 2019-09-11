@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Performance Quiz 1</title>
+	<!-- Author: Yanel Pinto -->
+
+</head>
+	<body>
+	<script language="javascript">
+var prompts = new Array();
+prompts[0] = new  Array("Release Date: ","Run Time:","Rating: ","Cast: ","Director: ","Genre: ","Synopsis: ");
+var entry = new Array();
+//For Loop Counters
+var i;
+i = 0;
+var y;
+//Capture user prompt to evaluate for quit
+var capt;	
+		
+//Loop for gathering movie entry data.
+while (capt != "quit")
+{
+	entry[i] = new Array();
+	for (y=0; y < prompts[0].length; y++) 
+	{
+		capt = prompt (prompts[0][y],"");
+		if (capt == "quit") {
+				break;
+		}
+			else {
+				entry[i][y] = capt;
+				}
+	}
+i++;
+}
+	
+//For Loop 2 Counters
+var x;
+var z;
+	
+		
+//For Loop for display entry information
+for (z=0; z < i; z++)
+{
+		for (x=0; x < prompts[0].length; x++)
+		{
+			if (entry[z][x] != null)
+				{
+				document.write (prompts[0][x] + entry[z][x] + "<br />" );
+				}
+			else
+				{
+				document.write (prompts[0][x] + "<br />");
+				}
+		}
+document.write ("<hr>");
+}
+
+	</script>
+</body>
+</html>
