@@ -7,6 +7,7 @@
 <!-- Milestone: 2.1  -->
 </head>
 <body>
+<!-- Javascript Setup  -->
 <script language="Javascript">
 //Declarations
 var myQuestions = new Array();  // Questions array
@@ -18,20 +19,35 @@ grade = 0;                      // Initial value of grade
 //Quiz Setup
 //Question 1
 myQuestions[0] = new Array("The shape of the body in the water can be affected by: _______. Please type the letter only.\n",
-						   "(a) Weight control\n","(b) Streamlining\n","(c) Posture");
+						   "(a) Weight control\n","(b) Streamlining\n","(c) Posture\n");
 //Answer 1
 myAnswers[0] = "c"
 //Question 2
 myQuestions[1] = new Array("What stroke is the most fun? Please type the letter only.\n",
-						   "(a) Freestyle \n","(b) Backstroke\n","(c) Breast stroke");
+						   "(a) Freestyle \n","(b) Backstroke \n","(c) Breast stroke \n");
 //Answer 2
 myAnswers[1] = "c"
+//Question 3
+myQuestions[2] = new Array("What is the fifth stroke?.\n",
+						   "(a) Breaststroke \n","(b) Streamline \n","(c) Doggie Paddle \n");
+//Answer 3
+myAnswers[2] = "b"
+//Question 4
+myQuestions[3] = new Array("Swimmers should not go more than 15 meters underwater otherwise they will be disqualified.\n",
+						   "(a) True \n","(b) False \n","");
+//Answer 4
+myAnswers[3] = "a"
+//Question 5
+myQuestions[4] = new Array("There is a single right way to do everything in this sport.\n",
+						   "(a) True \n","(b) False \n","");
+//Answer 5
+myAnswers[4] = "b"
 </script>
 
+<!-- Javascript Functions  -->
 <script>
-//User interface
-var userchoice
-userchoice = prompt("Welcome to Trivia Quiz.  Would you like to begin? /n Please type yes to begin or no to exit.","");
+function quiz()
+{
 for (i=0; i < myQuestions.length; i++)
 {
 myResponse[i] = prompt(myQuestions[i][0] + myQuestions[i][1] + myQuestions[i][2] + myQuestions[i][3],"");  // Question Prompt
@@ -45,9 +61,44 @@ else
 alert("Incorrect!");
 }
 }
-// Grade display
-alert("Your score is " + grade + "/" + myQuestions.length + ".");
-//Github Edit
+return grade
+}
+function displayresults(grade)
+{
+var stringHTML;
+stringHTML = "";
+for (y=0; y < myQuestions.length; y++)
+{
+stringHTML += myQuestions[y][0] + myQuestions[y][1] + myQuestions[y][2] + myQuestions[y][3] + "\n Correct Answer = " + myAnswers[y] +"\n Your Answer = " + myResponse[y] + "\n";
+}
+stringHTML += "Your score is " + grade + "/" + myQuestions.length + ".";
+return stringHTML;
+}
+</script>
+	
+<script>
+//User interface
+var userchoice;
+while (userchoice != "quit")
+{
+userchoice = prompt("Welcome to Trivia Quiz.  Would you like to begin? \n Please type yes to begin or quit to exit.","");
+if (userchoice.toLowerCase() == "yes")
+{
+//Call quiz function
+grade = quiz();
+alert(displayresults(grade));
+}
+else if (userchoice.toLowerCase() == "quit")
+{
+alert("Study harder.")
+}
+else
+{
+alert("Invalid response")
+}
+}
+	
+
 </script>
 </body>
 </html>
