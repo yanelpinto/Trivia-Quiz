@@ -14,41 +14,44 @@ var myQuestions = new Array();  // Questions array
 var myAnswers = new Array();    // Answers array
 var myResponse = new Array();   // Response array
 var i;                          // For loop 1 variable
-var grade;                      // Grade value
-grade = 0;                      // Initial value of grade
 //Quiz Setup
 //Question 1
 myQuestions[0] = new Array("The shape of the body in the water can be affected by: _______. Please type the letter only.\n",
 						   "(a) Weight control\n","(b) Streamlining\n","(c) Posture\n");
 //Answer 1
-myAnswers[0] = new Array("c","d");
+myAnswers[0] = new Array("c","posture");
 //Question 2
 myQuestions[1] = new Array("What stroke is the most fun? Please type the letter only.\n",
 						   "(a) Freestyle \n","(b) Backstroke \n","(c) Breast stroke \n");
 //Answer 2
-myAnswers[1] = new Array("c");
+myAnswers[1] = new Array("c","breast stroke","breastroke","breaststroke");
 //Question 3
 myQuestions[2] = new Array("What is the fifth stroke?.\n",
 						   "(a) Breaststroke \n","(b) Streamline \n","(c) Doggie Paddle \n");
 //Answer 3
-myAnswers[2] = new Array("b");
+myAnswers[2] = new Array("b","streamline");
 //Question 4
 myQuestions[3] = new Array("Swimmers should not go more than 15 meters underwater otherwise they will be disqualified.\n",
 						   "(a) True \n","(b) False \n","");
 //Answer 4
-myAnswers[3] = new Array("a");
+myAnswers[3] = new Array("a","true");
 //Question 5
 myQuestions[4] = new Array("There is a single right way to do everything in this sport.\n",
 						   "(a) True \n","(b) False \n","");
 //Answer 5
-myAnswers[4] = new Array("b");
+myAnswers[4] = new Array("b", "false");
+//Question 6
+myQuestions[5] = new Array("Name one of the four major swim strokes. \n","","","");
+//Answer 6
+myAnswers[5] = new Array("freestyle","free","free-style","backstroke","breastroke", "breaststroke", "breast stroke", "butterfly");
 </script>
 
 <!-- Javascript Functions  -->
 <script>
 function quiz()
 {
-var n
+var grade;                      // Grade value
+grade = 0;                      // Initial value of grade
 for (i=0; i < myQuestions.length; i++)
 {
 myResponse[i] = prompt(myQuestions[i][0] + myQuestions[i][1] + myQuestions[i][2] + myQuestions[i][3],"");  // Question Prompt
