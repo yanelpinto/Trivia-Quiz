@@ -67,9 +67,19 @@ i = 0;								// Reset for loop counter.
 document.body.innerHTML = "";  			// Clear body of HTML page.
 	
 //Call questions from questions array.  Print to screen w/ text box
-document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="lname"><br>' + '<input type="submit" value="Submit" onClick="mainmenu(lname.value)"></form>')
+document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="myResponse"><br>' + '<input type="submit" value="Submit" onClick="answercheck(i,myResponse.value)"></form>')
+}
 	
-
+function answercheck(i, myResponse)
+{
+	if (myAnswers[i].includes(myResponse.toLowerCase()))
+	{
+	alert("Correct.")
+	}
+	else
+	{
+	alert("Incorrect.")
+	}
 }
 	
 </script>	
