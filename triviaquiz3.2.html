@@ -6,6 +6,38 @@
 </head>
 
 <body onLoad="home()">				<!-- Call home() function to initialize HTML. -->
+<script>  // Question Setup
+var myQuestions = new Array();  // Questions array
+var myAnswers = new Array();    // Answers array
+var myResponse = new Array();   // Response array
+var i;                          // For loop 1 variable
+//Quiz Setup
+//Question 1
+myQuestions[0] = "The shape of the body in the water can be affected by: _______.<br>(a) Weight control<br>(b) Streamlining<br>(c) Posture<br>";
+//Answer 1
+myAnswers[0] = new Array("c","posture");
+//Question 2
+myQuestions[1] = "What stroke is the most fun?<br>(a) Freestyle<br>(b) Backstroke<br>(c) Breast stroke";
+//Answer 2
+myAnswers[1] = new Array("c","breast stroke","breastroke","breaststroke");
+//Question 3
+myQuestions[2] = "What is the fifth stroke?<br>(a) Breaststroke<br>(b) Streamline<br>(c) Doggie Paddle";
+//Answer 3
+myAnswers[2] = new Array("b","streamline");
+//Question 4
+myQuestions[3] = "Swimmers should not go more than 15 meters underwater otherwise they will be disqualified<br>(a) True<br>(b) False";
+//Answer 4
+myAnswers[3] = new Array("a","true");
+//Question 5
+myQuestions[4] = "There is a single right way to do everything in this sport<br>(a) True<br>(b) False";
+//Answer 5
+myAnswers[4] = new Array("b", "false");
+//Question 6
+myQuestions[5] = "Name one of the four major swim strokes";
+//Answer 6
+myAnswers[5] = new Array("freestyle","free","free-style","backstroke","breastroke", "breaststroke", "breast stroke", "butterfly");
+</script>
+	
 <script>
 function home()						// Function to initialize main menu.  Used onLoad.
 {
@@ -31,19 +63,16 @@ function mainmenu(boxval)			// Function for handling input into text box on main
 }
 function quiz()						// Function for beginnning quiz.
 {
+i = 0;								// Reset for loop counter.
 document.body.innerHTML = "";  			// Clear body of HTML page.
-document.write("Begin quiz.");			// Temp.
+	
+//Call questions from questions array.  Print to screen w/ text box
+document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="lname"><br>' + '<input type="submit" value="Submit" onClick="mainmenu(lname.value)"></form>')
+	
+
 }
 	
 </script>	
-	
-
-<!--Initial Quiz Load  
-<form name = "form1">
-Welcome to Trivia Quiz.  Would you like to begin? Please type yes to begin or quit to exit. <br>
-<input type="text" name="lname"><br>
-<input type="submit" value="Submit" onClick="test(lname.value)">
-</form>-->
 
 	
 </body>
