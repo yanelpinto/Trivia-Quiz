@@ -5,52 +5,58 @@
 <title>Untitled Document</title>
 </head>
 
-<body onLoad="home()">				<!-- Call home() function to initialize HTML. -->
+<body onLoad="timerPrompt()">					<!-- Call home() function to initialize HTML. -->
 <script>  // Question Setup
 var grade;
 var myQuestions = new Array();  // Questions array
 var myAnswers = new Array();    // Answers array
 var myResponse = new Array();   // Response array
-var i;                          // For loop 1 variable
+var tlimit;
+tlimit = 0;
+var y;
+grade = 0;
+y = 0;
 //Quiz Setup
 //Question 1
 myQuestions[0] = "The shape of the body in the water can be affected by: _______.<br>(a) Weight control<br>(b) Streamlining<br>(c) Posture<br>";
 //Answer 1
 myAnswers[0] = new Array("c","posture");
 //Question 2
-myQuestions[1] = "What stroke is the most fun?<br>(a) Freestyle<br>(b) Backstroke<br>(c) Breast stroke";
+myQuestions[1] = "What stroke is the most fun?<br>(a) Freestyle<br>(b) Backstroke<br>(c) Breast stroke<br>";
 //Answer 2
 myAnswers[1] = new Array("c","breast stroke","breastroke","breaststroke");
 //Question 3
-myQuestions[2] = "What is the fifth stroke?<br>(a) Breaststroke<br>(b) Streamline<br>(c) Doggie Paddle";
+myQuestions[2] = "What is the fifth stroke?<br>(a) Breaststroke<br>(b) Streamline<br>(c) Doggie Paddle<br>";
 //Answer 3
 myAnswers[2] = new Array("b","streamline");
 //Question 4
-myQuestions[3] = "Swimmers should not go more than 15 meters underwater otherwise they will be disqualified<br>(a) True<br>(b) False";
+myQuestions[3] = "Swimmers should not go more than 15 meters underwater otherwise they will be disqualified<br>(a) True<br>(b) False<br>";
 //Answer 4
 myAnswers[3] = new Array("a","true");
 //Question 5
-myQuestions[4] = "There is a single right way to do everything in this sport<br>(a) True<br>(b) False";
+myQuestions[4] = "There is a single right way to do everything in this sport<br>(a) True<br>(b) False<br>";
 //Answer 5
 myAnswers[4] = new Array("b", "false");
 //Question 6
-myQuestions[5] = "Name one of the four major swim strokes";
+myQuestions[5] = "Name one of the four major swim strokes<br>";
 //Answer 6
 myAnswers[5] = new Array("freestyle","free","free-style","backstroke","breastroke", "breaststroke", "breast stroke", "butterfly");
 </script>
 	
 <script>
-function home()						// Function to initialize main menu.  Used onLoad.
+function home()							// Function to initialize main menu.  Used onLoad.
 {
 document.write('<form name = "form1">' + 'Welcome to Trivia Quiz.  Would you like to begin? Please type yes to begin or quit to exit. <br>' +'<input type="text" name="lname"><br>' + '<input type="submit" value="Submit" onClick="mainmenu(lname.value)"></form>')
 }
 	
-function mainmenu(boxval)			// Function for handling input into text box on main view.
+function mainmenu(boxval)				// Function for handling input into text box on main view.
 {
 	switch(boxval)					// Switch statement to handle main menu options.
 		{
-			case "yes":				// Call function to begin quiz.
-				quiz();
+			case "yes":	// Call function to begin quiz.
+				document.body.innerHTML = "";
+				timer();
+				//quiz(0);
 				break;
 			case "quit":			// Dead end for HTML site.  Must be refreshed after this option.
 				document.body.innerHTML = "";  			//Clear body of HTML page.
@@ -62,33 +68,75 @@ function mainmenu(boxval)			// Function for handling input into text box on main
 				home();
 		}
 }
-function quiz()						// Function for beginnning quiz.
-{
-i = 0;   // Reset for loop counter.
-grade = 0;
-document.body.innerHTML = "";  			// Clear body of HTML page.
 	
-//Call questions from questions array.  Print to screen w/ text box
-document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="myResponse"><br>' + '<input type="submit" value="Submit" onClick="answercheck(i, myResponse.value)"></form><br><br>')
+function quiz(i)						// Function for beginnning quiz.
+{
+document.body.innerHTML = "";  			// Clear body of HTML page.
+
+	if (i < myQuestions.length)			// If statement to handle end of questions.
+	{
+	y = i;								// Assign value of local variable to global variable so HTML can correctly index.
+										//Call questions from questions array.  Print to screen w/ text box
+	document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="myResponse"><br>' + '<input type="submit" value="Submit" onClick="answercheck(y, myResponse.value)"></form><br><br>')
+	
+	}
+	else							// Complete! Exit loop.
+	{
+	displayresults();
+	}
 }
 	
-function answercheck(i, myResponse)
+function answercheck(i, resp)			// Function to check answers and call next question.
 {
-	if (myAnswers[i].includes(myResponse.toLowerCase()))
+	if (myAnswers[i].includes(resp.toLowerCase()))
 	{
-	alert("Correct.")
+	alert("Correct.");
 	grade += 1;
-	alert(grade);
-	return grade;
 	}
 	else
 	{
-	alert("Incorrect.")
+	alert("Incorrect.");
 	}
+	myResponse[i] = resp;
+	i += 1;					// Next question
+	quiz(i);				// Call quiz and pass next question value.
 }
 	
-</script>	
+function displayresults()				// Function to print results to HTML page.
+{
+var stringHTML;
+stringHTML = "";
+for (y=0; y < myQuestions.length; y++)
+{
+stringHTML += myQuestions[y] + "<br>Correct Answer = " + myAnswers[y] +"<br> Your Answer = " + myResponse[y] + "<br><br>";
+}
+stringHTML += "Your score is " + grade + "/" + myQuestions.length + ".<br>";
+document.body.innerHTML = "";
+document.write(stringHTML);
+}
 
+function timerPrompt()					// Prompt if user wants to impose time limit.
+{
+// Set the date we're counting down to
+document.write('Would you like to impose a time-limit on yourself?<br><input type="submit" value=" Yes " onClick="timerSetup();"><input type="submit" value="  No  " onClick="answercheck(y, myResponse.value)"></form><br>');
+}
+function timerSetup()					// Prompt user to enter time limit.
+{
+document.body.innerHTML = ""; 
+document.write('Enter your time limit in minutes.<br><input type="text" name="tlimit"><br><input type="submit" value="Submit" onClick="verifytime(tlimit.value);"></form><br>');
+}
+function verifytime(t)
+{
+alert("Your value is " + t);
+/*if (isNaN(tlimit))
+{
+alert("Not a number.");
+}
+else
+{
+alert("OK.");*/
+}
 	
+</script>
 </body>
 </html>
