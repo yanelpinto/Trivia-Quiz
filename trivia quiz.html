@@ -81,18 +81,24 @@ stringHTML += "Your score is " + grade + "/" + myQuestions.length + ".";
 return stringHTML;
 }
 </script>
-	
+
+<!-- Timer -->
 <script>
 //User interface
 var userchoice;
 while (userchoice != "quit")
 {
-userchoice = prompt("Welcome to Trivia Quiz.  Would you like to begin? \n Please type yes to begin or quit to exit.","");
+'userchoice = prompt("Welcome to Trivia Quiz.  Would you like to begin? \n Please type yes to begin or quit to exit.","");
+
+<form name = "form1">
+  Last name: <input type="text" name="lname"><br>
+  <input type="submit" value="Submit">
+</form>
 if (userchoice.toLowerCase() == "yes")
 {
 //Call quiz function
-grade = quiz();
-alert(displayresults(grade));
+'grade = quiz();
+'alert(displayresults(grade));
 }
 else if (userchoice.toLowerCase() == "quit")
 {

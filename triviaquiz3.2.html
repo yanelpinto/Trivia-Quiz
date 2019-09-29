@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body onLoad="home()">				<!-- Call home() function to initialize HTML. -->
+<script>
+function home()						// Function to initialize main menu.  Used onLoad.
+{
+document.write('<form name = "form1">' + 'Welcome to Trivia Quiz.  Would you like to begin? Please type yes to begin or quit to exit. <br>' +'<input type="text" name="lname"><br>' + '<input type="submit" value="Submit" onClick="mainmenu(lname.value)"></form>')
+}
+	
+function mainmenu(boxval)			// Function for handling input into text box on main view.
+{
+	switch(boxval)					// Switch statement to handle main menu options.
+		{
+			case "yes":				// Call function to begin quiz.
+				quiz();
+				break;
+			case "quit":			// Dead end for HTML site.  Must be refreshed after this option.
+				document.body.innerHTML = "";  			//Clear body of HTML page.
+				document.write("Thanks for visiting Trivia Quiz.  See you soon!");
+				break;
+			default:				// Error handling for invalid selection.
+				alert("Invalid response.  Try again.")
+				document.body.innerHTML = "";
+				home();
+		}
+}
+function quiz()						// Function for beginnning quiz.
+{
+document.body.innerHTML = "";  			// Clear body of HTML page.
+document.write("Begin quiz.");			// Temp.
+}
+	
+</script>	
+	
+
+<!--Initial Quiz Load  
+<form name = "form1">
+Welcome to Trivia Quiz.  Would you like to begin? Please type yes to begin or quit to exit. <br>
+<input type="text" name="lname"><br>
+<input type="submit" value="Submit" onClick="test(lname.value)">
+</form>-->
+
+	
+</body>
+</html>
