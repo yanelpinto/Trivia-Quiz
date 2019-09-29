@@ -11,9 +11,10 @@ var grade;
 var myQuestions = new Array();  // Questions array
 var myAnswers = new Array();    // Answers array
 var myResponse = new Array();   // Response array
-var tlimit;
-tlimit = 0;
 var y;
+var timeLimit;
+var timer;
+timeLimit = 0;
 grade = 0;
 y = 0;
 //Quiz Setup
@@ -104,6 +105,7 @@ function answercheck(i, resp)			// Function to check answers and call next quest
 	
 function displayresults()				// Function to print results to HTML page.
 {
+clearTimeout(timer);					// Clear timer so it doesn't alert if finished on time.
 var stringHTML;
 stringHTML = "";
 for (y=0; y < myQuestions.length; y++)
@@ -118,25 +120,35 @@ document.write(stringHTML);
 function timerPrompt()					// Prompt if user wants to impose time limit.
 {
 // Set the date we're counting down to
-document.write('Would you like to impose a time-limit on yourself?<br><input type="submit" value=" Yes " onClick="timerSetup();"><input type="submit" value="  No  " onClick="answercheck(y, myResponse.value)"></form><br>');
+document.write('Would you like to impose a time-limit on yourself?<br><input type="submit" value=" Yes " onClick="timerSetup();"><input type="submit" value="  No  " onClick="quizStartNoTime();"></form><br>');
 }
 function timerSetup()					// Prompt user to enter time limit.
 {
 document.body.innerHTML = ""; 
-document.write('Enter your time limit in minutes.<br><input type="text" name="tlimit"><br><input type="submit" value="Submit" onClick="verifytime(tlimit.value);"></form><br>');
+document.write('<form name = "form1">' + 'Please enter the time limit you would like to impose in minutes.<br>' +'<input type="text" name="tlim"><br>' + '<input type="submit" value="Submit" onClick="verifytime(tlim.value)"></form>')
 }
-function verifytime(t)
+function verifytime(tlim)				// Validate that time is number value and pass back to quiz function.
 {
-alert("Your value is " + t);
-/*if (isNaN(tlimit))
-{
-alert("Not a number.");
-}
+if (isNaN(tlim) || tlim < 0)						// If for validating that tlim is a number.
+	{
+	alert("Invalid response.  Value should be number only and greater than 0.") 	// Error alert.
+	}
 else
-{
-alert("OK.");*/
+	{
+	quizStart(tlim*1000*60);
+	}
 }
-	
+function quizStart(tlim)				// Take tlim value as timer value, set timer and begin quiz by calling quiz function.
+{
+timer = setTimeout(function(){ 			// Set timer when quiz starts.			
+alert("Time is up!")
+displayresults(); }, tlim);
+quiz(0);								// Call quiz function.
+}
+function quizStartNoTime()				// Quiz with no time limit imposed.
+{
+quiz(0);
+}
 </script>
 </body>
 </html>
