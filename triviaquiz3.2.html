@@ -7,6 +7,7 @@
 
 <body onLoad="home()">				<!-- Call home() function to initialize HTML. -->
 <script>  // Question Setup
+var grade;
 var myQuestions = new Array();  // Questions array
 var myAnswers = new Array();    // Answers array
 var myResponse = new Array();   // Response array
@@ -63,11 +64,12 @@ function mainmenu(boxval)			// Function for handling input into text box on main
 }
 function quiz()						// Function for beginnning quiz.
 {
-i = 0;								// Reset for loop counter.
+i = 0;   // Reset for loop counter.
+grade = 0;
 document.body.innerHTML = "";  			// Clear body of HTML page.
 	
 //Call questions from questions array.  Print to screen w/ text box
-document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="myResponse"><br>' + '<input type="submit" value="Submit" onClick="answercheck(i,myResponse.value)"></form>')
+document.write('<form name = "form1">' + myQuestions[i] + '<input type="text" name="myResponse"><br>' + '<input type="submit" value="Submit" onClick="answercheck(i, myResponse.value)"></form><br><br>')
 }
 	
 function answercheck(i, myResponse)
@@ -75,6 +77,9 @@ function answercheck(i, myResponse)
 	if (myAnswers[i].includes(myResponse.toLowerCase()))
 	{
 	alert("Correct.")
+	grade += 1;
+	alert(grade);
+	return grade;
 	}
 	else
 	{
