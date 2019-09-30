@@ -52,6 +52,8 @@ myAnswers[5] = new Array("freestyle","free","free-style","backstroke","breastrok
 <script>
 function home()							// Function to initialize main menu.  Used onLoad.
 {
+grade = 0;
+document.body.innerHTML = "";
 document.write('<form name = "form1">' + 'Welcome to Trivia Quiz.  Would you like to begin? Please type yes to begin or quit to exit. <br>' +'<input type="text" name="lname"><br>' + '<input type="submit" value="Submit" onClick="mainmenu(lname.value)"></form>')
 }	
 function mainmenu(boxval)				// Function for handling input into text box on main view.
@@ -113,6 +115,7 @@ for (y=0; y < maxi; y++)
 stringHTML += myQuestions[y] + "<br>Correct Answer = " + myAnswers[y] +"<br> Your Answer = " + myResponse[y] + "<br><br>";
 }
 stringHTML += "Your score is " + grade + "/" + maxi + ".<br>";
+stringHTML += '<form name = "form1">' +'<input type="submit" value="Return Home" onClick="home();"></form>'
 document.body.innerHTML = "";
 document.write(stringHTML);
 }
