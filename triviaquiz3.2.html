@@ -26,11 +26,11 @@ y = 0;
 //Question 1
 myQuestions[0] = "The shape of the body in the water can be affected by: _______.<br>(a) Weight control<br>(b) Streamlining<br>(c) Posture<br>";
 //Answer 1
-myAnswers[0] = new Array("c","posture");
+myAnswers[0] = new Array("c","posture","postures");
 //Question 2
 myQuestions[1] = "What stroke is the most fun?<br>(a) Freestyle<br>(b) Backstroke<br>(c) Breast stroke<br>";
 //Answer 2
-myAnswers[1] = new Array("c","breast stroke","breastroke","breaststroke");
+myAnswers[1] = new Array("c","breast stroke","breastroke","breaststroke","breast");
 //Question 3
 myQuestions[2] = "What is the fifth stroke?<br>(a) Breaststroke<br>(b) Streamline<br>(c) Doggie Paddle<br>";
 //Answer 3
@@ -182,7 +182,7 @@ else									// Call quiz function.
 	}
 	else
 	{
-	maxi = maxii;
+	maxi = Math.round(maxii);
 	}
 timerPrompt();
 }
