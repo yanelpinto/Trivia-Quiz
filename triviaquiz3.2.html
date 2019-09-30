@@ -14,8 +14,11 @@ var myResponse = new Array();   // Response array
 var y;
 var timeLimit;
 var timer;
+var timer3;
 var tt;
 var tt = 0;
+var maxi;
+maxi = 0;
 timeLimit = 0;
 grade = 0;
 y = 0;
@@ -50,15 +53,14 @@ myAnswers[5] = new Array("freestyle","free","free-style","backstroke","breastrok
 function home()							// Function to initialize main menu.  Used onLoad.
 {
 document.write('<form name = "form1">' + 'Welcome to Trivia Quiz.  Would you like to begin? Please type yes to begin or quit to exit. <br>' +'<input type="text" name="lname"><br>' + '<input type="submit" value="Submit" onClick="mainmenu(lname.value)"></form>')
-}
-	
+}	
 function mainmenu(boxval)				// Function for handling input into text box on main view.
 {
 	switch(boxval)					// Switch statement to handle main menu options.
 		{
 			case "yes":	// Call function to begin quiz.
 				document.body.innerHTML = "";
-				timerPrompt();
+				numQuestionsPrompt();
 				break;
 			case "quit":			// Dead end for HTML site.  Must be refreshed after this option.
 				document.body.innerHTML = "";  			//Clear body of HTML page.
@@ -69,13 +71,12 @@ function mainmenu(boxval)				// Function for handling input into text box on mai
 				document.body.innerHTML = "";
 				home();
 		}
-}
-	
+}	
 function quiz(i)						// Function for beginnning quiz.
 {
 document.body.innerHTML = "";  			// Clear body of HTML page.
 
-	if (i < myQuestions.length)			// If statement to handle end of questions.
+	if (i < maxi)			// If statement to handle end of questions.
 	{
 	y = i;								// Assign value of local variable to global variable so HTML can correctly index.
 										//Call questions from questions array.  Print to screen w/ text box
@@ -85,41 +86,40 @@ document.body.innerHTML = "";  			// Clear body of HTML page.
 	{
 	displayresults();
 	}
-}
-	
+}	
 function answercheck(i, resp)			// Function to check answers and call next question.
 {
 	if (myAnswers[i].includes(resp.toLowerCase()))
 	{
-	alert("Correct.");
+	//alert("Correct.");				// Turn off for timer functionality.  (Effectively timer paused if user alerts on)
 	grade += 1;
 	}
 	else
 	{
-	alert("Incorrect.");
+	//alert("Incorrect.");				// Turn off for timer functionality.  (Effectively timer paused if user alerts on)
 	}
 	myResponse[i] = resp;
 	i += 1;					// Next question
 	quiz(i);				// Call quiz and pass next question value.
 }
-	
 function displayresults()				// Function to print results to HTML page.
 {
 clearTimeout(timer);					// Clear timer so it doesn't alert if finished on time.
 clearTimeout(timer3);
 var stringHTML;
 stringHTML = "";
-for (y=0; y < myQuestions.length; y++)
+for (y=0; y < maxi; y++)
 {
 stringHTML += myQuestions[y] + "<br>Correct Answer = " + myAnswers[y] +"<br> Your Answer = " + myResponse[y] + "<br><br>";
 }
-stringHTML += "Your score is " + grade + "/" + myQuestions.length + ".<br>";
+stringHTML += "Your score is " + grade + "/" + maxi + ".<br>";
 document.body.innerHTML = "";
 document.write(stringHTML);
 }
 function timerPrompt()					// Prompt if user wants to impose time limit.
 {
 // Set the date we're counting down to
+document.body.innerHTML = ""; 
 document.write('Would you like to impose a time-limit on yourself?<br><input type="submit" value=" Yes " onClick="timerSetup();"><input type="submit" value="  No  " onClick="quizStartNoTime();"></form><br>');
 }
 function timerSetup()					// Prompt user to enter time limit.
@@ -151,13 +151,38 @@ function quizStartNoTime()				// Quiz with no time limit imposed.
 {
 quiz(0);
 }
-function timercont()
+function timercont()					// Continuous timer for user view.
 {
 document.getElementById("counter").innerHTML = tt + " s";
 timer3 = setTimeout(function(){ 			// Set timer when quiz starts.			
 tt++;
 timercont();
 }, 1000);
+}
+function numQuestionsPrompt()			// Add function to allow user to choice number of questions.
+{
+document.body.innerHTML = ""; 
+document.write('<form name = "form1">' + 'How many questions would you like to answer?  There are ' + myQuestions.length + ' total questions available.<br>' +'<input type="text" name="quests"><br>' + '<input type="submit" value="Submit" onClick="numQuestions(quests.value)"></form>')
+}
+function numQuestions(maxii)			// Verify number of questions entered by user and correct if necessary.
+{
+if (isNaN(maxii) || maxii < 1)
+{
+alert("Invalid entry.  Must be number greater than 0.")
+numQuestionsPrompt();
+}
+else									// Call quiz function.
+{
+	if (maxii > myQuestions.length)
+	{
+	maxi = myQuestions.length;
+	}
+	else
+	{
+	maxi = maxii;
+	}
+timerPrompt();
+}
 }
 </script>
 </body>
