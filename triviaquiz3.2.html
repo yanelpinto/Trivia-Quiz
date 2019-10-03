@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Untitled Document</title>
+<title>Trivia Quiz</title>
 </head>
 
 <body onLoad="home()">					<!-- Call home() function to initialize HTML. -->
@@ -16,7 +16,7 @@ var timeLimit;
 var timer;
 var timer3;
 var tt;
-var tt = 0;
+var tt = 2;
 var maxi;
 maxi = 0;
 timeLimit = 0;
@@ -138,7 +138,8 @@ if (isNaN(tlim) || tlim < 0)						// If for validating that tlim is a number.
 	}
 else
 	{
-	quizStart(tlim*1000*60);
+	quizStart(tlim*1000*60+2000);
+	tt=2;
 	}
 }
 function quizStart(tlim)				// Take tlim value as timer value, set timer and begin quiz by calling quiz function.
@@ -147,19 +148,19 @@ timer = setTimeout(function(){ 			// Set timer when quiz starts.
 alert("Time is up!")
 displayresults(); }, tlim);
 timer2 = setTimeout(function(){ 			// Set timer when quiz starts.			
-timercont(); }, 1000);
+timercont(tlim); }, 1000);
 quiz(0);								// Call quiz function.
 }
 function quizStartNoTime()				// Quiz with no time limit imposed.
 {
 quiz(0);
 }
-function timercont()					// Continuous timer for user view.
+function timercont(tlim)					// Continuous timer for user view.
 {
-document.getElementById("counter").innerHTML = tt + " s";
+document.getElementById("counter").innerHTML = tlim/1000 - tt + " s remaining.";
 timer3 = setTimeout(function(){ 			// Set timer when quiz starts.			
 tt++;
-timercont();
+timercont(tlim);
 }, 1000);
 }
 function numQuestionsPrompt()			// Add function to allow user to choice number of questions.
