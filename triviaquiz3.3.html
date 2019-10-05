@@ -5,7 +5,7 @@
 <title>Trivia Quiz</title>
 </head>
 
-<body onLoad="cookieTest()">					<!-- Call home() function to initialize HTML. -->
+<body onLoad="home()">					<!-- Call home() function to initialize HTML. -->
 <script>  // Question Setup
 var grade;
 var myQuestions = new Array();  // Questions array
@@ -114,7 +114,29 @@ for (y=0; y < maxi; y++)
 {
 stringHTML += myQuestions[y] + "<br>Correct Answer = " + myAnswers[y] +"<br> Your Answer = " + myResponse[y] + "<br><br>";
 }
-stringHTML += "Your score is " + grade + "/" + maxi + ".<br>";
+stringHTML += "Your score is " + Math.round(parseFloat(grade)/parseFloat(maxi)*10000)/100 + "%" + ".<br>";
+	if (getCookie("prevCorrect") == null)	// Creates/Modifies cookie for total correct answers from user.
+		{
+		var prevCorrect = grade;
+		setCookie("prevCorrect",grade,"","")
+		}
+	else
+		{
+		var prevCorrect = parseInt(getCookie("prevCorrect")) + parseInt(grade);
+		setCookie("prevCorrect",prevCorrect,"","")
+		}
+	
+	if (getCookie("prevQuest") == null)	   // Creates/Modifies cookie for total questions answered from user.
+		{
+		var prevQuest = maxi;
+		setCookie("prevQuest",maxi,"","")
+		}
+	else
+		{
+		var prevQuest = parseInt(getCookie("prevQuest")) + parseInt(maxi);
+		setCookie("prevQuest",prevQuest,"","")
+		}
+stringHTML += "Historic/Running Average = " + Math.round(parseFloat(prevCorrect)/parseFloat(prevQuest)*10000)/100 + "%" + "<br>"; 
 stringHTML += '<form name = "form1">' +'<input type="submit" value="Return Home" onClick="home();"></form>'
 document.body.innerHTML = "";
 document.write(stringHTML);
