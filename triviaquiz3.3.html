@@ -190,7 +190,7 @@ timerPrompt();
 }
 function setCookie(cookieName, cookieValue, cookiePath, cookieExpires)
 	{
-	cookieValue = escape(cookieValue);
+	//cookieValue = escape(cookieValue);
 	if (cookieExpires == "")
 		{
 			var nowDate = new Date();
@@ -202,17 +202,39 @@ function setCookie(cookieName, cookieValue, cookiePath, cookieExpires)
 			cookiePath = ";Path=" + cookiePath;
 		}
 	document.cookie = cookieName + "=" + cookieValue + ";expires=" + cookieExpires + cookiePath;
-	alert(document.cookie);
+	getCookie(cookieName);
 }
 function getCookie(cookieName)
 	{
-		//var cookieValue = document.cookie;
-		//var cookieStartsAt = cookieValue.indexOf(" " + cookieName + "=");
-alert(document.cookie);
+		var cookieValue = document.cookie;										// Retrieve cookie string.
+		var cookieStartsAt = cookieValue.indexOf(" " + cookieName + "=");		// Get cookie start position.
+		
+		if (cookieStartsAt == -1)
+			{
+				cookieStartsAt = cookieValue.indexOf(cookieName + "=");			// 2nd search to check if it is cookie #1.
+			}
+
+		if (cookieStartsAt == -1)
+			{
+				cookieValue = null
+			}
+		else
+		{
+		cookieStartsAt = cookieValue.indexOf("=",cookieStartsAt)+1;				// 
+		var cookieEndsAt = cookieValue.indexOf(";",cookieStartsAt);
+			
+			if (cookieEndsAt == -1)
+				{
+					cookieEndsAt = cookieValue.length;
+				}
+			
+		cookieValue = cookieValue.substring(cookieStartsAt,cookieEndsAt);
+		}
+return cookieValue
 }
 function cookieTest()
 	{
-	setCookie("cookie1", "test1", "","");
+	setCookie("cookie2", "test2", "","");
 	}
 </script>
 </body>
